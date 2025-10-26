@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Advanced Custom CSS with modern styling
+# Advanced Custom CSS with modern styling - FIXED FOR LARGE SCREENS
 st.markdown("""
 <style>
     /* Global Styles */
@@ -23,6 +23,7 @@ st.markdown("""
 
     .stApp {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-size: 1.1rem !important;
     }
 
     /* Unified Card Style */
@@ -30,11 +31,12 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border-radius: 20px;
-        padding: 2rem;
-        margin: 1rem 0;
+        padding: 2.5rem;
+        margin: 1.5rem 0;
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        font-size: 1.1rem;
     }
 
     .custom-card:hover {
@@ -42,9 +44,9 @@ st.markdown("""
         box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
     }
 
-    /* Header Styles */
+    /* Header Styles - LARGER FOR BIG SCREENS */
     .main-header {
-        font-size: 3.5rem;
+        font-size: 4rem !important;
         background: linear-gradient(45deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -55,32 +57,44 @@ st.markdown("""
     }
 
     .section-header {
-        font-size: 2rem;
+        font-size: 2.5rem !important;
         color: #2c3e50;
-        margin: 2rem 0 1rem 0;
+        margin: 2rem 0 1.5rem 0;
         font-weight: 700;
-        border-left: 5px solid #667eea;
-        padding-left: 1rem;
+        border-left: 6px solid #667eea;
+        padding-left: 1.5rem;
     }
 
-    /* Metric Cards */
+    /* Metric Cards - LARGER */
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 1.5rem;
+        padding: 2rem;
         border-radius: 15px;
         text-align: center;
         box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
+        font-size: 1.1rem;
+    }
+
+    .metric-card h2 {
+        font-size: 2.5rem !important;
+        margin: 0.5rem 0;
+    }
+
+    .metric-card h3 {
+        font-size: 1.5rem !important;
+        margin: 0.5rem 0;
     }
 
     /* Feature Boxes */
     .feature-box {
         background: rgba(255, 255, 255, 0.9);
-        padding: 1.5rem;
+        padding: 2rem;
         border-radius: 15px;
-        margin: 0.5rem 0;
-        border-left: 4px solid #667eea;
+        margin: 1rem 0;
+        border-left: 5px solid #667eea;
         transition: all 0.3s ease;
+        font-size: 1.1rem;
     }
 
     .feature-box:hover {
@@ -88,15 +102,22 @@ st.markdown("""
         transform: scale(1.02);
     }
 
-    /* Button Styles */
+    .feature-box h4 {
+        font-size: 1.4rem !important;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    /* Button Styles - LARGER */
     .stButton button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         border: none;
-        padding: 0.5rem 2rem;
+        padding: 1rem 3rem;
         border-radius: 25px;
         font-weight: 600;
         transition: all 0.3s ease;
+        font-size: 1.2rem;
     }
 
     .stButton button:hover {
@@ -104,59 +125,115 @@ st.markdown("""
         box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
 
-    /* Progress Bar */
-    .stProgress > div > div > div > div {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Text Sizes - LARGER */
+    .stMarkdown {
+        font-size: 1.1rem !important;
     }
 
-    /* File Uploader */
+    .stNumberInput input {
+        font-size: 1.2rem !important;
+        padding: 1rem !important;
+    }
+
+    .stSelectbox label, .stMultiselect label {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+    }
+
+    .stSlider label {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* File Uploader - LARGER */
     .uploadedFile {
-        border: 2px dashed #667eea;
+        border: 3px dashed #667eea;
         border-radius: 15px;
-        padding: 2rem;
+        padding: 3rem;
         text-align: center;
+        font-size: 1.2rem;
+    }
+
+    /* Dataframe Styling */
+    .dataframe {
+        font-size: 1.1rem !important;
+    }
+
+    /* Make all text larger */
+    .stApp h1 {
+        font-size: 3rem !important;
+    }
+
+    .stApp h2 {
+        font-size: 2.5rem !important;
+    }
+
+    .stApp h3 {
+        font-size: 2rem !important;
+    }
+
+    .stApp h4 {
+        font-size: 1.5rem !important;
+    }
+
+    .stApp p, .stApp li, .stApp span {
+        font-size: 1.2rem !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Responsive container */
+    .main .block-container {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        max-width: 95%;
+    }
+
+    /* Larger icons */
+    .icon-large {
+        font-size: 4rem !important;
+        margin-bottom: 1rem;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Header Section with animated gradient
+# Header Section with animated gradient - UPDATED WITH LARGER TEXT
 st.markdown("""
 <div class="custom-card">
     <h1 class="main-header">🚀 Customer Segmentation Pro</h1>
-    <p style='text-align: center; font-size: 1.2rem; color: #555; margin-bottom: 2rem;'>
+    <p style='text-align: center; font-size: 1.5rem; color: #555; margin-bottom: 2rem;'>
     Advanced AI-Powered Customer Analytics Platform
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-# Introduction Section with unified card style
+# Introduction Section with unified card style - UPDATED WITH LARGER TEXT
 st.markdown("""
 <div class="custom-card">
-    <h2 style='color: #2c3e50; margin-bottom: 1.5rem;'>🎯 What is Customer Segmentation?</h2>
-    <div style='display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;'>
+    <h2 style='color: #2c3e50; margin-bottom: 2rem; font-size: 2.5rem;'>🎯 What is Customer Segmentation?</h2>
+    <div style='display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;'>
         <div>
-            <p style='font-size: 1.1rem; line-height: 1.6; color: #555;'>
+            <p style='font-size: 1.3rem; line-height: 1.8; color: #555;'>
             <strong>Customer segmentation</strong> is a powerful marketing strategy that divides a company's customers 
             into groups based on shared characteristics. Using <strong>Machine Learning algorithms</strong> like K-Means clustering, 
             we can automatically discover natural patterns in your customer data and create meaningful segments for 
             targeted marketing, personalized experiences, and improved customer retention.
             </p>
-            <p style='font-size: 1.1rem; line-height: 1.6; color: #555; margin-top: 1rem;'>
+            <p style='font-size: 1.3rem; line-height: 1.8; color: #555; margin-top: 1.5rem;'>
             This advanced platform helps businesses unlock hidden insights from their customer data, enabling 
             data-driven decision making and strategic marketing initiatives.
             </p>
         </div>
         <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                   color: white; padding: 1.5rem; border-radius: 15px; text-align: center;'>
-            <h3 style='margin-bottom: 1rem;'>📈 ROI Boost</h3>
-            <p style='font-size: 2rem; font-weight: bold; margin: 0;'>+47%</p>
-            <p style='font-size: 0.9rem;'>Average increase in marketing efficiency</p>
+                   color: white; padding: 2rem; border-radius: 15px; text-align: center;'>
+            <h3 style='margin-bottom: 1.5rem; font-size: 1.8rem;'>📈 ROI Boost</h3>
+            <p style='font-size: 3rem; font-weight: bold; margin: 0;'>+47%</p>
+            <p style='font-size: 1.2rem;'>Average increase in marketing efficiency</p>
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Benefits Section with modern cards
+# Benefits Section with modern cards - UPDATED WITH LARGER TEXT
 st.markdown('<div class="section-header">💡 Key Benefits</div>', unsafe_allow_html=True)
 
 benefits_col1, benefits_col2, benefits_col3 = st.columns(3)
@@ -164,57 +241,57 @@ benefits_col1, benefits_col2, benefits_col3 = st.columns(3)
 with benefits_col1:
     st.markdown("""
     <div class="feature-box">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Targeted Marketing</h4>
-        <p style='color: #555;'>Create personalized campaigns for each customer segment, increasing conversion rates and customer engagement.</p>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem;'>🎯 Targeted Marketing</h4>
+        <p style='color: #555; font-size: 1.2rem;'>Create personalized campaigns for each customer segment, increasing conversion rates and customer engagement.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with benefits_col2:
     st.markdown("""
     <div class="feature-box">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>💰 Cost Efficiency</h4>
-        <p style='color: #555;'>Optimize marketing spend by focusing resources on high-value segments and reducing wasted outreach.</p>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem;'>💰 Cost Efficiency</h4>
+        <p style='color: #555; font-size: 1.2rem;'>Optimize marketing spend by focusing resources on high-value segments and reducing wasted outreach.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with benefits_col3:
     st.markdown("""
     <div class="feature-box">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Data-Driven Insights</h4>
-        <p style='color: #555;'>Uncover hidden patterns in customer behavior and make informed strategic decisions based on data.</p>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem;'>📊 Data-Driven Insights</h4>
+        <p style='color: #555; font-size: 1.2rem;'>Uncover hidden patterns in customer behavior and make informed strategic decisions based on data.</p>
     </div>
     """, unsafe_allow_html=True)
 
-# How It Works Section
+# How It Works Section - UPDATED WITH LARGER TEXT
 st.markdown("""
 <div class="custom-card">
-    <h2 style='color: #2c3e50; margin-bottom: 1.5rem;'>🔧 How It Works</h2>
-    <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;'>
-        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
-            <div style='font-size: 2rem; margin-bottom: 1rem;'>📁</div>
-            <h4 style='color: #2c3e50;'>Upload Data</h4>
-            <p style='color: #555; font-size: 0.9rem;'>Provide your customer dataset in CSV format</p>
+    <h2 style='color: #2c3e50; margin-bottom: 2rem; font-size: 2.5rem;'>🔧 How It Works</h2>
+    <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;'>
+        <div style='text-align: center; padding: 2rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 3rem; margin-bottom: 1.5rem;'>📁</div>
+            <h4 style='color: #2c3e50; font-size: 1.5rem;'>Upload Data</h4>
+            <p style='color: #555; font-size: 1.1rem;'>Provide your customer dataset in CSV format</p>
         </div>
-        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
-            <div style='font-size: 2rem; margin-bottom: 1rem;'>🎯</div>
-            <h4 style='color: #2c3e50;'>Select Features</h4>
-            <p style='color: #555; font-size: 0.9rem;'>Choose key customer attributes for analysis</p>
+        <div style='text-align: center; padding: 2rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 3rem; margin-bottom: 1.5rem;'>🎯</div>
+            <h4 style='color: #2c3e50; font-size: 1.5rem;'>Select Features</h4>
+            <p style='color: #555; font-size: 1.1rem;'>Choose key customer attributes for analysis</p>
         </div>
-        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
-            <div style='font-size: 2rem; margin-bottom: 1rem;'>📈</div>
-            <h4 style='color: #2c3e50;'>Analyze</h4>
-            <p style='color: #555; font-size: 0.9rem;'>AI algorithms find optimal customer segments</p>
+        <div style='text-align: center; padding: 2rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 3rem; margin-bottom: 1.5rem;'>📈</div>
+            <h4 style='color: #2c3e50; font-size: 1.5rem;'>Analyze</h4>
+            <p style='color: #555; font-size: 1.1rem;'>AI algorithms find optimal customer segments</p>
         </div>
-        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
-            <div style='font-size: 2rem; margin-bottom: 1rem;'>🚀</div>
-            <h4 style='color: #2c3e50;'>Implement</h4>
-            <p style='color: #555; font-size: 0.9rem;'>Apply insights to your marketing strategy</p>
+        <div style='text-align: center; padding: 2rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 3rem; margin-bottom: 1.5rem;'>🚀</div>
+            <h4 style='color: #2c3e50; font-size: 1.5rem;'>Implement</h4>
+            <p style='color: #555; font-size: 1.1rem;'>Apply insights to your marketing strategy</p>
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Common Features Section
+# Common Features Section - UPDATED WITH LARGER TEXT
 st.markdown('<div class="section-header">📊 Common Segmentation Features</div>', unsafe_allow_html=True)
 
 features_col1, features_col2, features_col3 = st.columns(3)
@@ -222,8 +299,8 @@ features_col1, features_col2, features_col3 = st.columns(3)
 with features_col1:
     st.markdown("""
     <div class="custom-card">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>💰 Spending Behavior</h4>
-        <ul style='color: #555; line-height: 1.8;'>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.5rem;'>💰 Spending Behavior</h4>
+        <ul style='color: #555; line-height: 2.0; font-size: 1.2rem;'>
         <li><strong>Annual Income</strong> - Customer earning capacity</li>
         <li><strong>Spending Score</strong> - Purchasing behavior index</li>
         <li><strong>Purchase Frequency</strong> - How often they buy</li>
@@ -235,8 +312,8 @@ with features_col1:
 with features_col2:
     st.markdown("""
     <div class="custom-card">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>👥 Demographic Data</h4>
-        <ul style='color: #555; line-height: 1.8;'>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.5rem;'>👥 Demographic Data</h4>
+        <ul style='color: #555; line-height: 2.0; font-size: 1.2rem;'>
         <li><strong>Age Group</strong> - Generational segmentation</li>
         <li><strong>Location</strong> - Geographic patterns</li>
         <li><strong>Occupation</strong> - Professional background</li>
@@ -248,8 +325,8 @@ with features_col2:
 with features_col3:
     st.markdown("""
     <div class="custom-card">
-        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📱 Engagement Metrics</h4>
-        <ul style='color: #555; line-height: 1.8;'>
+        <h4 style='color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.5rem;'>📱 Engagement Metrics</h4>
+        <ul style='color: #555; line-height: 2.0; font-size: 1.2rem;'>
         <li><strong>Website Visits</strong> - Online engagement</li>
         <li><strong>Email Opens</strong> - Communication responsiveness</li>
         <li><strong>Social Media</strong> - Brand interaction level</li>
@@ -260,22 +337,22 @@ with features_col3:
 
 # Divider with style
 st.markdown("""
-<div style='height: 2px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 3rem 0;'></div>
+<div style='height: 3px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 4rem 0;'></div>
 """, unsafe_allow_html=True)
 
 # -------------------------
-# MAIN APPLICATION SECTION
+# MAIN APPLICATION SECTION - UPDATED WITH LARGER TEXT
 # -------------------------
 st.markdown("""
 <div class="custom-card">
-    <h2 style='color: #2c3e50; text-align: center; margin-bottom: 2rem;'>🚀 Start Your Analysis</h2>
-    <p style='text-align: center; color: #555; font-size: 1.1rem;'>
+    <h2 style='color: #2c3e50; text-align: center; margin-bottom: 2rem; font-size: 2.5rem;'>🚀 Start Your Analysis</h2>
+    <p style='text-align: center; color: #555; font-size: 1.4rem;'>
     Upload your customer data below to begin discovering valuable customer segments
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-# Upload dataset section
+# Upload dataset section - UPDATED WITH LARGER TEXT
 upload_col1, upload_col2 = st.columns([2, 1])
 
 with upload_col1:
@@ -287,12 +364,13 @@ with upload_col1:
 
 with upload_col2:
     st.markdown("""
-    <div style='text-align: center; padding: 1rem;'>
-        <div style='font-size: 3rem; margin-bottom: 0.5rem;'>📊</div>
-        <p style='color: #555; font-size: 0.9rem;'>Supported: CSV files with numerical data</p>
+    <div style='text-align: center; padding: 2rem;'>
+        <div style='font-size: 4rem; margin-bottom: 1rem;'>📊</div>
+        <p style='color: #555; font-size: 1.2rem;'>Supported: CSV files with numerical data</p>
     </div>
     """, unsafe_allow_html=True)
 
+# MAIN APPLICATION LOGIC - FIXED INDENTATION
 if uploaded_file is not None:
     try:
         # Load and display data
@@ -305,7 +383,7 @@ if uploaded_file is not None:
             # Dataset overview in metric cards
             st.markdown("""
             <div class="custom-card">
-                <h3 style='color: #2c3e50; margin-bottom: 1.5rem;'>📊 Dataset Overview</h3>
+                <h3 style='color: #2c3e50; margin-bottom: 2rem; font-size: 2rem;'>📊 Dataset Overview</h3>
             </div>
             """, unsafe_allow_html=True)
 
@@ -352,7 +430,7 @@ if uploaded_file is not None:
             # Data preview
             st.markdown("""
             <div class="custom-card">
-                <h3 style='color: #2c3e50; margin-bottom: 1rem;'>👀 Data Preview</h3>
+                <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>👀 Data Preview</h3>
             </div>
             """, unsafe_allow_html=True)
             st.dataframe(customer_data.head(10), use_container_width=True)
@@ -360,8 +438,8 @@ if uploaded_file is not None:
             # Feature selection
             st.markdown("""
             <div class="custom-card">
-                <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Step 1: Select Features for Clustering</h3>
-                <p style='color: #555; margin-bottom: 1rem;'>
+                <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>🎯 Step 1: Select Features for Clustering</h3>
+                <p style='color: #555; margin-bottom: 1rem; font-size: 1.2rem;'>
                 Choose two numerical features that will be used to segment your customers. 
                 <strong>Pro Tip:</strong> Select features that represent different aspects of customer behavior (e.g., Income vs Spending Score).
                 </p>
@@ -376,7 +454,8 @@ if uploaded_file is not None:
                     "**Select two features:**",
                     columns,
                     default=columns[:2] if len(columns) >= 2 else columns,
-                    max_selections=2
+                    max_selections=2,
+                    help="Choose two numerical features for clustering analysis"
                 )
 
                 if len(selected_features) == 2:
@@ -398,8 +477,8 @@ if uploaded_file is not None:
                         # Elbow Method
                         st.markdown("""
                         <div class="custom-card">
-                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>📈 Step 2: Find Optimal Number of Clusters</h3>
-                            <p style='color: #555;'>
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>📈 Step 2: Find Optimal Number of Clusters</h3>
+                            <p style='color: #555; font-size: 1.2rem;'>
                             The <strong>Elbow Method</strong> helps determine the optimal number of clusters by showing the point where 
                             adding more clusters doesn't significantly improve the model. Look for the 'elbow' in the graph below.
                             </p>
@@ -429,7 +508,7 @@ if uploaded_file is not None:
                         # Cluster selection and analysis
                         st.markdown("""
                         <div class="custom-card">
-                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎨 Step 3: Create Customer Segments</h3>
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>🎨 Step 3: Create Customer Segments</h3>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -445,7 +524,7 @@ if uploaded_file is not None:
                             # Cluster distribution
                             st.markdown("""
                             <div class="custom-card">
-                                <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Segment Distribution</h4>
+                                <h4 style='color: #2c3e50; margin-bottom: 1rem; font-size: 1.8rem;'>📊 Segment Distribution</h4>
                             </div>
                             """, unsafe_allow_html=True)
 
@@ -466,7 +545,7 @@ if uploaded_file is not None:
                         # Visualization
                         st.markdown("""
                         <div class="custom-card">
-                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Step 4: Visualize Customer Segments</h3>
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>📊 Step 4: Visualize Customer Segments</h3>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -480,7 +559,7 @@ if uploaded_file is not None:
                                 alpha=0.7, edgecolors='white', linewidth=1
                             )
 
-                        # Centroids - Using standard matplotlib marker 'X' instead of '★'
+                        # Centroids
                         ax2.scatter(
                             kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
                             s=400, c="red", marker="X", label="Centroids",
@@ -498,8 +577,8 @@ if uploaded_file is not None:
                         # Prediction Section
                         st.markdown("""
                         <div class="custom-card">
-                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🔮 Step 5: Predict New Customer Segment</h3>
-                            <p style='color: #555;'>
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>🔮 Step 5: Predict New Customer Segment</h3>
+                            <p style='color: #555; font-size: 1.2rem;'>
                             Enter details for a new customer to see which segment they would belong to:
                             </p>
                         </div>
@@ -509,50 +588,54 @@ if uploaded_file is not None:
 
                         with pred_col1:
                             val1 = st.number_input(f"**{selected_features[0]}**",
-                                                   min_value=0.0, step=1.0,
+                                                   min_value=0.0, step=0.1, value=0.0,
                                                    help=f"Enter value for {selected_features[0]}")
                         with pred_col2:
                             val2 = st.number_input(f"**{selected_features[1]}**",
-                                                   min_value=0.0, step=1.0,
+                                                   min_value=0.0, step=0.1, value=0.0,
                                                    help=f"Enter value for {selected_features[1]}")
                         with pred_col3:
                             st.write("")  # Spacer
                             st.write("")  # Spacer
                             if st.button("🎯 Predict Customer Segment", type="primary", use_container_width=True):
-                                if val1 == 0 and val2 == 0:
+                                if val1 == 0.0 and val2 == 0.0:
                                     st.warning("⚠️ Please enter values greater than 0 for both features.")
                                 else:
                                     with st.spinner('Analyzing customer segment...'):
                                         try:
-                                            cluster_pred = kmeans.predict([[val1, val2]])[0]
+                                            # Ensure the input is in the correct format (2D array of floats)
+                                            input_data = np.array([[float(val1), float(val2)]])
+                                            cluster_pred = kmeans.predict(input_data)[0]
                                             st.success(f"**🎉 This customer belongs to Segment {cluster_pred + 1}**")
 
-                                            # Segment profile - Fixed color issues
+                                            # Segment profile
                                             segment_data = customer_data_clean[
                                                 customer_data_clean["Segment"] == cluster_pred + 1]
                                             st.markdown(f"""
                                             <div class="custom-card">
-                                                <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📋 Segment {cluster_pred + 1} Profile</h4>
+                                                <h4 style='color: #2c3e50; margin-bottom: 1rem; font-size: 1.8rem;'>📋 Segment {cluster_pred + 1} Profile</h4>
                                                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;'>
                                                     <div style='background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #667eea;'>
-                                                        <strong style='color: #2c3e50;'>Avg {selected_features[0]}</strong><br>
-                                                        <span style='color: #667eea; font-size: 1.2rem; font-weight: bold;'>{segment_data[selected_features[0]].mean():.2f}</span>
+                                                        <strong style='color: #2c3e50; font-size: 1.2rem;'>Avg {selected_features[0]}</strong><br>
+                                                        <span style='color: #667eea; font-size: 1.4rem; font-weight: bold;'>{segment_data[selected_features[0]].mean():.2f}</span>
                                                     </div>
                                                     <div style='background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #667eea;'>
-                                                        <strong style='color: #2c3e50;'>Avg {selected_features[1]}</strong><br>
-                                                        <span style='color: #667eea; font-size: 1.2rem; font-weight: bold;'>{segment_data[selected_features[1]].mean():.2f}</span>
+                                                        <strong style='color: #2c3e50; font-size: 1.2rem;'>Avg {selected_features[1]}</strong><br>
+                                                        <span style='color: #667eea; font-size: 1.4rem; font-weight: bold;'>{segment_data[selected_features[1]].mean():.2f}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             """, unsafe_allow_html=True)
                                         except Exception as e:
                                             st.error(f"❌ Error in prediction: {str(e)}")
+                                            st.info(
+                                                "💡 Make sure you're entering numerical values compatible with your dataset.")
 
                         # Download results
                         st.markdown("""
                         <div class="custom-card">
-                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>💾 Download Results</h3>
-                            <p style='color: #555;'>
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem; font-size: 2rem;'>💾 Download Results</h3>
+                            <p style='color: #555; font-size: 1.2rem;'>
                             Download your segmented customer data for further analysis or integration with other systems.
                             </p>
                         </div>
@@ -566,6 +649,8 @@ if uploaded_file is not None:
                             mime="text/csv",
                             use_container_width=True
                         )
+                else:
+                    st.info("👆 Please select exactly 2 features to proceed with clustering analysis.")
 
     except Exception as e:
         st.error(f"❌ Error processing the file: {str(e)}")
@@ -574,22 +659,22 @@ if uploaded_file is not None:
 else:
     # Empty state with attractive design
     st.markdown("""
-    <div class="custom-card" style='text-align: center; padding: 4rem;'>
-        <div style='font-size: 4rem; margin-bottom: 2rem;'>📊</div>
-        <h2 style='color: #2c3e50; margin-bottom: 1rem;'>Ready to Discover Customer Insights?</h2>
-        <p style='color: #555; font-size: 1.1rem; margin-bottom: 2rem;'>
+    <div class="custom-card" style='text-align: center; padding: 5rem;'>
+        <div style='font-size: 5rem; margin-bottom: 2rem;'>📊</div>
+        <h2 style='color: #2c3e50; margin-bottom: 2rem; font-size: 2.5rem;'>Ready to Discover Customer Insights?</h2>
+        <p style='color: #555; font-size: 1.4rem; margin-bottom: 3rem;'>
         Upload your customer data CSV file to begin your segmentation analysis and unlock valuable customer insights.
         </p>
-        <div style='background: rgba(102, 126, 234, 0.1); padding: 2rem; border-radius: 15px; display: inline-block;'>
-            <p style='color: #667eea; font-weight: bold; margin: 0;'>📁 Supported Format: CSV files</p>
+        <div style='background: rgba(102, 126, 234, 0.1); padding: 2.5rem; border-radius: 15px; display: inline-block;'>
+            <p style='color: #667eea; font-weight: bold; margin: 0; font-size: 1.3rem;'>📁 Supported Format: CSV files</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 # Footer
 st.markdown("""
-<div style='text-align: center; color: #666; margin-top: 3rem; padding: 2rem;'>
-    <p style='font-size: 0.9rem;'>
+<div style='text-align: center; color: #666; margin-top: 4rem; padding: 3rem;'>
+    <p style='font-size: 1.1rem;'>
     <strong>Customer Segmentation Pro</strong> • Built with Streamlit & Scikit-Learn • 
     Transform Your Customer Analytics 🚀
     </p>
