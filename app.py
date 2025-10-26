@@ -3,93 +3,595 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.cluster import KMeans
+import numpy as np
 
-st.set_page_config(page_title="Customer Segmentation", layout="wide")
+# Page configuration
+st.set_page_config(
+    page_title="Customer Segmentation Pro",
+    layout="wide",
+    page_icon="🛍️",
+    initial_sidebar_state="expanded"
+)
 
-st.title("🛍️ Customer Segmentation using K-Means")
+# Advanced Custom CSS with modern styling
+st.markdown("""
+<style>
+    /* Global Styles */
+    .main {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Unified Card Style */
+    .custom-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 1rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+    }
+
+    /* Header Styles */
+    .main-header {
+        font-size: 3.5rem;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 800;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .section-header {
+        font-size: 2rem;
+        color: #2c3e50;
+        margin: 2rem 0 1rem 0;
+        font-weight: 700;
+        border-left: 5px solid #667eea;
+        padding-left: 1rem;
+    }
+
+    /* Metric Cards */
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
+    }
+
+    /* Feature Boxes */
+    .feature-box {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 0.5rem 0;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: scale(1.02);
+    }
+
+    /* Button Styles */
+    .stButton button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 0.5rem 2rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .stButton button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Progress Bar */
+    .stProgress > div > div > div > div {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* File Uploader */
+    .uploadedFile {
+        border: 2px dashed #667eea;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Header Section with animated gradient
+st.markdown("""
+<div class="custom-card">
+    <h1 class="main-header">🚀 Customer Segmentation Pro</h1>
+    <p style='text-align: center; font-size: 1.2rem; color: #555; margin-bottom: 2rem;'>
+    Advanced AI-Powered Customer Analytics Platform
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Introduction Section with unified card style
+st.markdown("""
+<div class="custom-card">
+    <h2 style='color: #2c3e50; margin-bottom: 1.5rem;'>🎯 What is Customer Segmentation?</h2>
+    <div style='display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;'>
+        <div>
+            <p style='font-size: 1.1rem; line-height: 1.6; color: #555;'>
+            <strong>Customer segmentation</strong> is a powerful marketing strategy that divides a company's customers 
+            into groups based on shared characteristics. Using <strong>Machine Learning algorithms</strong> like K-Means clustering, 
+            we can automatically discover natural patterns in your customer data and create meaningful segments for 
+            targeted marketing, personalized experiences, and improved customer retention.
+            </p>
+            <p style='font-size: 1.1rem; line-height: 1.6; color: #555; margin-top: 1rem;'>
+            This advanced platform helps businesses unlock hidden insights from their customer data, enabling 
+            data-driven decision making and strategic marketing initiatives.
+            </p>
+        </div>
+        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                   color: white; padding: 1.5rem; border-radius: 15px; text-align: center;'>
+            <h3 style='margin-bottom: 1rem;'>📈 ROI Boost</h3>
+            <p style='font-size: 2rem; font-weight: bold; margin: 0;'>+47%</p>
+            <p style='font-size: 0.9rem;'>Average increase in marketing efficiency</p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Benefits Section with modern cards
+st.markdown('<div class="section-header">💡 Key Benefits</div>', unsafe_allow_html=True)
+
+benefits_col1, benefits_col2, benefits_col3 = st.columns(3)
+
+with benefits_col1:
+    st.markdown("""
+    <div class="feature-box">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Targeted Marketing</h4>
+        <p style='color: #555;'>Create personalized campaigns for each customer segment, increasing conversion rates and customer engagement.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with benefits_col2:
+    st.markdown("""
+    <div class="feature-box">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>💰 Cost Efficiency</h4>
+        <p style='color: #555;'>Optimize marketing spend by focusing resources on high-value segments and reducing wasted outreach.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with benefits_col3:
+    st.markdown("""
+    <div class="feature-box">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Data-Driven Insights</h4>
+        <p style='color: #555;'>Uncover hidden patterns in customer behavior and make informed strategic decisions based on data.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# How It Works Section
+st.markdown("""
+<div class="custom-card">
+    <h2 style='color: #2c3e50; margin-bottom: 1.5rem;'>🔧 How It Works</h2>
+    <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;'>
+        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 2rem; margin-bottom: 1rem;'>📁</div>
+            <h4 style='color: #2c3e50;'>Upload Data</h4>
+            <p style='color: #555; font-size: 0.9rem;'>Provide your customer dataset in CSV format</p>
+        </div>
+        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 2rem; margin-bottom: 1rem;'>🎯</div>
+            <h4 style='color: #2c3e50;'>Select Features</h4>
+            <p style='color: #555; font-size: 0.9rem;'>Choose key customer attributes for analysis</p>
+        </div>
+        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 2rem; margin-bottom: 1rem;'>📈</div>
+            <h4 style='color: #2c3e50;'>Analyze</h4>
+            <p style='color: #555; font-size: 0.9rem;'>AI algorithms find optimal customer segments</p>
+        </div>
+        <div style='text-align: center; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;'>
+            <div style='font-size: 2rem; margin-bottom: 1rem;'>🚀</div>
+            <h4 style='color: #2c3e50;'>Implement</h4>
+            <p style='color: #555; font-size: 0.9rem;'>Apply insights to your marketing strategy</p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Common Features Section
+st.markdown('<div class="section-header">📊 Common Segmentation Features</div>', unsafe_allow_html=True)
+
+features_col1, features_col2, features_col3 = st.columns(3)
+
+with features_col1:
+    st.markdown("""
+    <div class="custom-card">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>💰 Spending Behavior</h4>
+        <ul style='color: #555; line-height: 1.8;'>
+        <li><strong>Annual Income</strong> - Customer earning capacity</li>
+        <li><strong>Spending Score</strong> - Purchasing behavior index</li>
+        <li><strong>Purchase Frequency</strong> - How often they buy</li>
+        <li><strong>Average Order Value</strong> - Typical spend amount</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with features_col2:
+    st.markdown("""
+    <div class="custom-card">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>👥 Demographic Data</h4>
+        <ul style='color: #555; line-height: 1.8;'>
+        <li><strong>Age Group</strong> - Generational segmentation</li>
+        <li><strong>Location</strong> - Geographic patterns</li>
+        <li><strong>Occupation</strong> - Professional background</li>
+        <li><strong>Education Level</strong> - Academic qualifications</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with features_col3:
+    st.markdown("""
+    <div class="custom-card">
+        <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📱 Engagement Metrics</h4>
+        <ul style='color: #555; line-height: 1.8;'>
+        <li><strong>Website Visits</strong> - Online engagement</li>
+        <li><strong>Email Opens</strong> - Communication responsiveness</li>
+        <li><strong>Social Media</strong> - Brand interaction level</li>
+        <li><strong>Customer Lifetime Value</strong> - Long-term value</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Divider with style
+st.markdown("""
+<div style='height: 2px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 3rem 0;'></div>
+""", unsafe_allow_html=True)
 
 # -------------------------
-# Upload dataset
+# MAIN APPLICATION SECTION
 # -------------------------
-uploaded_file = st.file_uploader("Upload your dataset (CSV)", type=["csv"])
+st.markdown("""
+<div class="custom-card">
+    <h2 style='color: #2c3e50; text-align: center; margin-bottom: 2rem;'>🚀 Start Your Analysis</h2>
+    <p style='text-align: center; color: #555; font-size: 1.1rem;'>
+    Upload your customer data below to begin discovering valuable customer segments
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Upload dataset section
+upload_col1, upload_col2 = st.columns([2, 1])
+
+with upload_col1:
+    uploaded_file = st.file_uploader(
+        "**📁 Upload Your Customer Dataset (CSV Format)**",
+        type=["csv"],
+        help="Upload a CSV file with customer data including numerical features like income, age, spending scores, etc."
+    )
+
+with upload_col2:
+    st.markdown("""
+    <div style='text-align: center; padding: 1rem;'>
+        <div style='font-size: 3rem; margin-bottom: 0.5rem;'>📊</div>
+        <p style='color: #555; font-size: 0.9rem;'>Supported: CSV files with numerical data</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 if uploaded_file is not None:
-    customer_data = pd.read_csv(uploaded_file)
-    st.write("### Dataset Preview")
-    st.dataframe(customer_data.head())
+    try:
+        # Load and display data
+        customer_data = pd.read_csv(uploaded_file)
 
-    # -------------------------
-    # Select features
-    # -------------------------
-    st.write("### Select Features for Clustering")
-    columns = customer_data.columns.tolist()
-    selected_features = st.multiselect("Choose 2 features for clustering:", columns, default=[columns[3], columns[4]])
+        # Data validation
+        if len(customer_data) == 0:
+            st.error("❌ The uploaded file is empty. Please upload a valid CSV file with data.")
+        else:
+            # Dataset overview in metric cards
+            st.markdown("""
+            <div class="custom-card">
+                <h3 style='color: #2c3e50; margin-bottom: 1.5rem;'>📊 Dataset Overview</h3>
+            </div>
+            """, unsafe_allow_html=True)
 
-    if len(selected_features) == 2:
-        X = customer_data[selected_features].values
+            col1, col2, col3, col4 = st.columns(4)
 
-        # -------------------------
-        # Elbow Method
-        # -------------------------
-        wcss = []
-        for i in range(1, 11):
-            kmeans = KMeans(n_clusters=i, init='k-means++', random_state=42)
-            kmeans.fit(X)
-            wcss.append(kmeans.inertia_)
+            with col1:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div style='font-size: 2rem;'>👥</div>
+                    <h3>{len(customer_data):,}</h3>
+                    <p>Total Customers</p>
+                </div>
+                """, unsafe_allow_html=True)
 
-        fig, ax = plt.subplots()
-        sns.set()
-        ax.plot(range(1, 11), wcss, marker='o')
-        ax.set_title("The Elbow Point Graph")
-        ax.set_xlabel("Number of Clusters")
-        ax.set_ylabel("WCSS")
-        st.pyplot(fig)
+            with col2:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div style='font-size: 2rem;'>📋</div>
+                    <h3>{len(customer_data.columns)}</h3>
+                    <p>Features</p>
+                </div>
+                """, unsafe_allow_html=True)
 
-        # -------------------------
-        # Choose K & Run KMeans
-        # -------------------------
-        k = st.slider("Select number of clusters (K)", 2, 10, 5)
-        kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
-        Y = kmeans.fit_predict(X)
+            with col3:
+                numeric_cols = len(customer_data.select_dtypes(include=['number']).columns)
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div style='font-size: 2rem;'>🔢</div>
+                    <h3>{numeric_cols}</h3>
+                    <p>Numerical Features</p>
+                </div>
+                """, unsafe_allow_html=True)
 
-        customer_data["Cluster"] = Y
-        st.write("### Clustered Data")
-        st.dataframe(customer_data.head())
+            with col4:
+                missing_vals = customer_data.isnull().sum().sum()
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div style='font-size: 2rem;'>✅</div>
+                    <h3>{missing_vals}</h3>
+                    <p>Missing Values</p>
+                </div>
+                """, unsafe_allow_html=True)
 
-        # -------------------------
-        # Plot Clusters
-        # -------------------------
-        fig2, ax2 = plt.subplots(figsize=(8, 8))
-        colors = ["green", "red", "yellow", "violet", "blue", "orange", "pink", "cyan", "brown", "purple"]
+            # Data preview
+            st.markdown("""
+            <div class="custom-card">
+                <h3 style='color: #2c3e50; margin-bottom: 1rem;'>👀 Data Preview</h3>
+            </div>
+            """, unsafe_allow_html=True)
+            st.dataframe(customer_data.head(10), use_container_width=True)
 
-        for cluster in range(k):
-            ax2.scatter(
-                X[Y == cluster, 0], X[Y == cluster, 1],
-                s=50, c=colors[cluster], label=f'Cluster {cluster+1}'
-            )
+            # Feature selection
+            st.markdown("""
+            <div class="custom-card">
+                <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Step 1: Select Features for Clustering</h3>
+                <p style='color: #555; margin-bottom: 1rem;'>
+                Choose two numerical features that will be used to segment your customers. 
+                <strong>Pro Tip:</strong> Select features that represent different aspects of customer behavior (e.g., Income vs Spending Score).
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
 
-        # plot centroids
-        ax2.scatter(
-            kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-            s=200, c="black", marker="X", label="Centroids"
-        )
+            columns = customer_data.select_dtypes(include=['number']).columns.tolist()
+            if len(columns) < 2:
+                st.error("❌ Dataset must contain at least 2 numerical columns for clustering.")
+            else:
+                selected_features = st.multiselect(
+                    "**Select two features:**",
+                    columns,
+                    default=columns[:2] if len(columns) >= 2 else columns,
+                    max_selections=2
+                )
 
-        ax2.set_title("Customer Segments")
-        ax2.set_xlabel(selected_features[0])
-        ax2.set_ylabel(selected_features[1])
-        ax2.legend()
-        st.pyplot(fig2)
+                if len(selected_features) == 2:
+                    # Check for missing values in selected features
+                    if customer_data[selected_features].isnull().any().any():
+                        st.warning(
+                            "⚠️ Selected features contain missing values. Rows with missing values will be removed.")
+                        customer_data_clean = customer_data.dropna(subset=selected_features)
+                        X = customer_data_clean[selected_features].values
+                    else:
+                        customer_data_clean = customer_data
+                        X = customer_data_clean[selected_features].values
 
-        # -------------------------
-        # Predict new point
-        # -------------------------
-        st.write("### Predict Cluster for New Customer")
-        val1 = st.number_input(f"Enter {selected_features[0]}", min_value=0.0, step=1.0)
-        val2 = st.number_input(f"Enter {selected_features[1]}", min_value=0.0, step=1.0)
+                    # Check if we have enough data after cleaning
+                    if len(X) < 2:
+                        st.error(
+                            "❌ Not enough data points after removing missing values. Please select different features or upload a cleaner dataset.")
+                    else:
+                        # Elbow Method
+                        st.markdown("""
+                        <div class="custom-card">
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>📈 Step 2: Find Optimal Number of Clusters</h3>
+                            <p style='color: #555;'>
+                            The <strong>Elbow Method</strong> helps determine the optimal number of clusters by showing the point where 
+                            adding more clusters doesn't significantly improve the model. Look for the 'elbow' in the graph below.
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
 
-        if st.button("Predict Cluster"):
-            cluster_pred = kmeans.predict([[val1, val2]])[0]
-            st.success(f"👉 This customer belongs to **Cluster {cluster_pred+1}**")
+                        with st.spinner('🔍 Analyzing optimal clusters...'):
+                            wcss = []
+                            max_clusters = min(10, len(X))  # Ensure we don't exceed data points
+                            for i in range(1, max_clusters + 1):
+                                kmeans = KMeans(n_clusters=i, init='k-means++', random_state=42, n_init=10)
+                                kmeans.fit(X)
+                                wcss.append(kmeans.inertia_)
+
+                        # Create elbow plot
+                        fig, ax = plt.subplots(figsize=(12, 6))
+                        sns.set_style("whitegrid")
+                        plt.plot(range(1, max_clusters + 1), wcss, marker='o', linewidth=3, markersize=8,
+                                 color='#667eea', markerfacecolor='#764ba2', markeredgewidth=2)
+                        plt.title("Elbow Method - Optimal Cluster Analysis", fontsize=16, fontweight='bold', pad=20)
+                        plt.xlabel("Number of Clusters", fontsize=12)
+                        plt.ylabel("Within-Cluster Sum of Squares (WCSS)", fontsize=12)
+                        plt.grid(True, alpha=0.3)
+                        plt.tight_layout()
+                        st.pyplot(fig)
+
+                        # Cluster selection and analysis
+                        st.markdown("""
+                        <div class="custom-card">
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎨 Step 3: Create Customer Segments</h3>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                        k = st.slider("**Select number of customer segments:**", 2, min(10, len(X)), 3,
+                                      help="Choose based on the elbow point in the graph above")
+
+                        with st.spinner(f'🚀 Creating {k} customer segments...'):
+                            kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42, n_init=10)
+                            Y = kmeans.fit_predict(X)
+                            customer_data_clean = customer_data_clean.copy()
+                            customer_data_clean["Segment"] = Y + 1
+
+                            # Cluster distribution
+                            st.markdown("""
+                            <div class="custom-card">
+                                <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Segment Distribution</h4>
+                            </div>
+                            """, unsafe_allow_html=True)
+
+                            cluster_counts = customer_data_clean["Segment"].value_counts().sort_index()
+                            cols = st.columns(k)
+                            for i, col in enumerate(cols):
+                                with col:
+                                    count = cluster_counts.get(i + 1, 0)
+                                    percentage = (count / len(customer_data_clean)) * 100
+                                    st.markdown(f"""
+                                    <div class="metric-card">
+                                        <h3>Segment {i + 1}</h3>
+                                        <h2>{count}</h2>
+                                        <p>{percentage:.1f}% of customers</p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+
+                        # Visualization
+                        st.markdown("""
+                        <div class="custom-card">
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>📊 Step 4: Visualize Customer Segments</h3>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                        fig2, ax2 = plt.subplots(figsize=(14, 8))
+                        colors = plt.cm.viridis(np.linspace(0, 1, k))
+
+                        for cluster in range(k):
+                            ax2.scatter(
+                                X[Y == cluster, 0], X[Y == cluster, 1],
+                                s=80, c=[colors[cluster]], label=f'Segment {cluster + 1}',
+                                alpha=0.7, edgecolors='white', linewidth=1
+                            )
+
+                        # Centroids - Using standard matplotlib marker 'X' instead of '★'
+                        ax2.scatter(
+                            kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
+                            s=400, c="red", marker="X", label="Centroids",
+                            edgecolors='black', linewidth=2, alpha=0.9
+                        )
+
+                        ax2.set_title("Customer Segmentation Analysis", fontsize=18, fontweight='bold', pad=20)
+                        ax2.set_xlabel(selected_features[0], fontsize=14)
+                        ax2.set_ylabel(selected_features[1], fontsize=14)
+                        ax2.legend(fontsize=12)
+                        ax2.grid(True, alpha=0.3)
+                        plt.tight_layout()
+                        st.pyplot(fig2)
+
+                        # Prediction Section
+                        st.markdown("""
+                        <div class="custom-card">
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🔮 Step 5: Predict New Customer Segment</h3>
+                            <p style='color: #555;'>
+                            Enter details for a new customer to see which segment they would belong to:
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                        pred_col1, pred_col2, pred_col3 = st.columns([1, 1, 1])
+
+                        with pred_col1:
+                            val1 = st.number_input(f"**{selected_features[0]}**",
+                                                   min_value=0.0, step=1.0,
+                                                   help=f"Enter value for {selected_features[0]}")
+                        with pred_col2:
+                            val2 = st.number_input(f"**{selected_features[1]}**",
+                                                   min_value=0.0, step=1.0,
+                                                   help=f"Enter value for {selected_features[1]}")
+                        with pred_col3:
+                            st.write("")  # Spacer
+                            st.write("")  # Spacer
+                            if st.button("🎯 Predict Customer Segment", type="primary", use_container_width=True):
+                                if val1 == 0 and val2 == 0:
+                                    st.warning("⚠️ Please enter values greater than 0 for both features.")
+                                else:
+                                    with st.spinner('Analyzing customer segment...'):
+                                        try:
+                                            cluster_pred = kmeans.predict([[val1, val2]])[0]
+                                            st.success(f"**🎉 This customer belongs to Segment {cluster_pred + 1}**")
+
+                                            # Segment profile - Fixed color issues
+                                            segment_data = customer_data_clean[
+                                                customer_data_clean["Segment"] == cluster_pred + 1]
+                                            st.markdown(f"""
+                                            <div class="custom-card">
+                                                <h4 style='color: #2c3e50; margin-bottom: 1rem;'>📋 Segment {cluster_pred + 1} Profile</h4>
+                                                <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;'>
+                                                    <div style='background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #667eea;'>
+                                                        <strong style='color: #2c3e50;'>Avg {selected_features[0]}</strong><br>
+                                                        <span style='color: #667eea; font-size: 1.2rem; font-weight: bold;'>{segment_data[selected_features[0]].mean():.2f}</span>
+                                                    </div>
+                                                    <div style='background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #667eea;'>
+                                                        <strong style='color: #2c3e50;'>Avg {selected_features[1]}</strong><br>
+                                                        <span style='color: #667eea; font-size: 1.2rem; font-weight: bold;'>{segment_data[selected_features[1]].mean():.2f}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            """, unsafe_allow_html=True)
+                                        except Exception as e:
+                                            st.error(f"❌ Error in prediction: {str(e)}")
+
+                        # Download results
+                        st.markdown("""
+                        <div class="custom-card">
+                            <h3 style='color: #2c3e50; margin-bottom: 1rem;'>💾 Download Results</h3>
+                            <p style='color: #555;'>
+                            Download your segmented customer data for further analysis or integration with other systems.
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                        csv = customer_data_clean.to_csv(index=False)
+                        st.download_button(
+                            label="📥 Download Segmented Customer Data",
+                            data=csv,
+                            file_name="customer_segments_analysis.csv",
+                            mime="text/csv",
+                            use_container_width=True
+                        )
+
+    except Exception as e:
+        st.error(f"❌ Error processing the file: {str(e)}")
+        st.info("💡 Please make sure you've uploaded a valid CSV file with proper formatting.")
 
 else:
-    st.info("👆 Upload a dataset to get started!")
+    # Empty state with attractive design
+    st.markdown("""
+    <div class="custom-card" style='text-align: center; padding: 4rem;'>
+        <div style='font-size: 4rem; margin-bottom: 2rem;'>📊</div>
+        <h2 style='color: #2c3e50; margin-bottom: 1rem;'>Ready to Discover Customer Insights?</h2>
+        <p style='color: #555; font-size: 1.1rem; margin-bottom: 2rem;'>
+        Upload your customer data CSV file to begin your segmentation analysis and unlock valuable customer insights.
+        </p>
+        <div style='background: rgba(102, 126, 234, 0.1); padding: 2rem; border-radius: 15px; display: inline-block;'>
+            <p style='color: #667eea; font-weight: bold; margin: 0;'>📁 Supported Format: CSV files</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+<div style='text-align: center; color: #666; margin-top: 3rem; padding: 2rem;'>
+    <p style='font-size: 0.9rem;'>
+    <strong>Customer Segmentation Pro</strong> • Built with Streamlit & Scikit-Learn • 
+    Transform Your Customer Analytics 🚀
+    </p>
+</div>
+""", unsafe_allow_html=True)
